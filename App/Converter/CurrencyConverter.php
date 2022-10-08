@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Converter;
 
 use App\Converter\Converter;
@@ -9,8 +8,6 @@ use App\Converter\Converters\UsdConverter;
 
 class CurrencyConverter
 {
-
-
     public Converter $instance;
 
     public function setConverter(Converter $converter)
