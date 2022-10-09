@@ -28,7 +28,7 @@ class CurrencyConverter
                 $this->setConverter(new UsdConverter());
                 break;
             default:
-                throw new Exception('Currency converter not found');
+                throw new \Exception('Currency converter not found');
         }
     }
 }
