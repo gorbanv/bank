@@ -3,6 +3,7 @@
 namespace App\Accounts;
 
 use App\Currency\{Currency, Rub, Eur, Usd};
+use App\Accounts\AccountException;
 
 class MultiCurrencyAccount
 {
@@ -16,7 +17,7 @@ class MultiCurrencyAccount
     public function addCurrency(string $currencyName): void
     {
         if (array_key_exists($currencyName, $this->accountCurrencies)) {
-            throw new \Exception('Currency already added');
+            throw new AccountException('Currency already added');
         }
 
         switch ($currencyName) {
@@ -30,14 +31,14 @@ class MultiCurrencyAccount
                 $this->accountCurrencies[self::CURRENCY_USD] = new Usd();
                 break;
             default:
-                throw new \Exception('Currency type not found');
+                throw new AccountException('Currency type not found');
         }
     }
 
     public function getAccount(string $currencyName): Currency
     {
         if (!array_key_exists($currencyName, $this->accountCurrencies)) {
-            throw new \Exception('Account currency name not found');
+            throw new AccountException('Account currency name not found');
         }
         return $this->accountCurrencies[$currencyName];
     }
@@ -45,7 +46,7 @@ class MultiCurrencyAccount
     public function removeAccount(string $currencyName): void
     {
         if (!array_key_exists($currencyName, $this->accountCurrencies)) {
-            throw new \Exception('Account currency name not found');
+            throw new AccountException('Account currency name not found');
         }
         unset($this->accountCurrencies[$currencyName]);
     }
@@ -53,7 +54,7 @@ class MultiCurrencyAccount
     public function deposit(Currency $currency): void
     {
         if (!array_key_exists($currency::CURRENCY_NAME, $this->accountCurrencies)) {
-            throw new \Exception('Currency account not found');
+            throw new AccountException('Currency account not found');
         }
 
         $this->accountCurrencies[$currency::CURRENCY_NAME]->setBalance(
@@ -65,14 +66,14 @@ class MultiCurrencyAccount
     public function withdraw(Currency $currency): Currency
     {
         if (!array_key_exists($currency::CURRENCY_NAME, $this->accountCurrencies)) {
-            throw new \Exception('Currency account not found');
+            throw new AccountException('Currency account not found');
         }
 
         $currentBalance = $this->accountCurrencies[$currency::CURRENCY_NAME]->getBalance();
         $withdrawBalance = $currency->getBalance();
 
         if ($currentBalance < $withdrawBalance) {
-            throw new \Exception('Not enough funds in the account');
+            throw new AccountException('Not enough funds in the account');
         }
 
         $this->accountCurrencies[$currency::CURRENCY_NAME]->setBalance($currentBalance - $withdrawBalance);
@@ -87,7 +88,7 @@ class MultiCurrencyAccount
         } elseif ($currencyName && array_key_exists($currencyName, $this->accountCurrencies)) {
             return $this->accountCurrencies[$currencyName]->getBalance();
         } else {
-            throw new \Exception('Account currency name not found');
+            throw new AccountException('Account currency name not found');
         }
     }
 
@@ -99,7 +100,7 @@ class MultiCurrencyAccount
     public function setDefaultCurrency(string $defaultCurrencyName): void
     {
         if (!array_key_exists($defaultCurrencyName, $this->accountCurrencies)) {
-            throw new \Exception('Account currency name not found');
+            throw new AccountException('Account currency name not found');
         }
 
         $this->defaultCurrencyName = $defaultCurrencyName;
