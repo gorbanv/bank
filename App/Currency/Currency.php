@@ -14,6 +14,8 @@ abstract class Currency
             $this->amount = $amount;
         }
         else if ($amount instanceof Currency) {
+//            echo "\n" . $this->amount . "\n";
+//            echo "\n" . $this->convertCurrency($amount) . "\n";
             $this->amount += $this->convertCurrency($amount);
         }
     }
@@ -27,6 +29,11 @@ abstract class Currency
     }
 
     public function convertCurrency(Currency $currency): float {
+
+        if (static::CURRENCY_NAME === $currency::CURRENCY_NAME) {
+            return $currency->getBalance();
+        }
+
         $converter = new CurrencyConverter();
         $exchangeData = CurrencyData::getExchangeRate(static::CURRENCY_NAME);
         $converter->prepareConverter($currency::CURRENCY_NAME);
@@ -34,7 +41,7 @@ abstract class Currency
         return $converter->instance->convert(
             static::CURRENCY_NAME,
             $currency->getBalance(),
-            $exchangeData[CurrencyData::RUB]
+            $exchangeData[$currency::CURRENCY_NAME]
         );
     }
 
