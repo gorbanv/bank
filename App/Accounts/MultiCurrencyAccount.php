@@ -13,7 +13,7 @@ class MultiCurrencyAccount
     private string $defaultCurrencyName;
     private array $accountCurrencies = [];
 
-    public function addCurrency(string $currencyName)
+    public function addCurrency(string $currencyName): void
     {
         if (array_key_exists($currencyName, $this->accountCurrencies)) {
             throw new \Exception('Currency already added');
@@ -34,7 +34,7 @@ class MultiCurrencyAccount
         }
     }
 
-    public function removeAccount(string $currencyName)
+    public function removeAccount(string $currencyName): void
     {
         if (!array_key_exists($currencyName, $this->accountCurrencies)) {
             throw new \Exception('Account currency name not found');
@@ -42,7 +42,7 @@ class MultiCurrencyAccount
         unset($this->accountCurrencies[$currencyName]);
     }
 
-    public function deposit(Currency $currency)
+    public function deposit(Currency $currency): void
     {
         if (!array_key_exists($currency::CURRENCY_NAME, $this->accountCurrencies)) {
             throw new \Exception('Currency account not found');
@@ -54,7 +54,7 @@ class MultiCurrencyAccount
         );
     }
 
-    public function withdraw(Currency $currency)
+    public function withdraw(Currency $currency): Currency
     {
         if (!array_key_exists($currency::CURRENCY_NAME, $this->accountCurrencies)) {
             throw new \Exception('Currency account not found');
@@ -72,7 +72,7 @@ class MultiCurrencyAccount
         return $this->accountCurrencies[$currency::CURRENCY_NAME];
     }
 
-    public function getBalance(string $currencyName = null)
+    public function getBalance(string $currencyName = null): float
     {
         if (!$currencyName && array_key_exists($this->defaultCurrencyName, $this->accountCurrencies)) {
             return $this->accountCurrencies[$this->defaultCurrencyName]->getBalance();
@@ -83,12 +83,12 @@ class MultiCurrencyAccount
         }
     }
 
-    public function getSuppliedCurrency()
+    public function getSuppliedCurrency(): array
     {
         return array_keys($this->accountCurrencies);
     }
 
-    public function setDefaultCurrency(string $defaultCurrencyName)
+    public function setDefaultCurrency(string $defaultCurrencyName): void
     {
         if (!array_key_exists($defaultCurrencyName, $this->accountCurrencies)) {
             throw new \Exception('Account currency name not found');

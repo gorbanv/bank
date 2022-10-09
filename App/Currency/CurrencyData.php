@@ -27,7 +27,7 @@ class CurrencyData
         self::$exchangeRate[$mainCurrency][$changeCurrency] = $exchangeRate;
         self::$exchangeRate[$changeCurrency][$mainCurrency] = $exchangeRate;
     }
-    public static function getExchangeRate(String $currency) {
+    public static function getExchangeRate(String $currency): array {
         return self::$exchangeRate[$currency];
     }
 

@@ -10,12 +10,12 @@ class CurrencyConverter
 {
     public Converter $instance;
 
-    public function setConverter(Converter $converter)
+    public function setConverter(Converter $converter): void
     {
         $this->instance = $converter;
     }
 
-    public function prepareConverter(string $fromName)
+    public function prepareConverter(string $fromName): void
     {
         switch ($fromName) {
             case 'RUB';

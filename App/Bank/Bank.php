@@ -6,12 +6,11 @@ use App\Accounts\MultiCurrencyAccount;
 class Bank {
     private MultiCurrencyAccount $account;
 
-    public function createNewCurrencyAccount() {
+    public function createNewCurrencyAccount(): MultiCurrencyAccount{
         return $account = new MultiCurrencyAccount();
     }
 
-    public function getAccount() {
+    public function getAccount(): MultiCurrencyAccount {
         return $this->account;
     }
-
 }
