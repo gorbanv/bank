@@ -104,4 +104,8 @@ class MultiCurrencyAccount
 
         $this->defaultCurrencyName = $defaultCurrencyName;
     }
+
+    public function getDefaultCurrency(): string {
+        return $this->defaultCurrencyName;
+    }
 }
