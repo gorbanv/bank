@@ -1,5 +1,5 @@
 <?php
-namespace App\Currency;
+namespace App\Currency\Currencies;
 
 use App\Currency\Currency;
 use App\Currency\CurrencyData;

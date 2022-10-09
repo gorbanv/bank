@@ -2,7 +2,8 @@
 
 namespace App\Accounts;
 
-use App\Currency\{Currency, Rub, Eur, Usd};
+use App\Currency\Currency;
+use App\Currency\Currencies\{Rub, Eur, Usd};
 use App\Accounts\AccountException;
 
 class MultiCurrencyAccount

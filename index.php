@@ -4,7 +4,8 @@ namespace App;
 require_once('vendor/autoload.php');
 
 use App\Bank\Bank;
-use App\Currency\{Rub, Eur, Usd, CurrencyData};
+use App\Currency\Currencies\{Rub, Eur, Usd};
+use App\Currency\CurrencyData;
 
 $bank = New Bank();
 
@@ -50,6 +51,7 @@ echo $account->getBalance() . PHP_EOL;
 echo "Step 7\n";
 $cash = $account->withdraw(new RUB(1000));
 $account->deposit(new EUR($cash));
+echo $account->getBalance('EUR') . PHP_EOL;
 
 echo "Step 8\n";
 Eur::setExchangeRate('RUB', 120);
