@@ -34,6 +34,14 @@ class MultiCurrencyAccount
         }
     }
 
+    public function getAccount(string $currencyName): Currency
+    {
+        if (!array_key_exists($currencyName, $this->accountCurrencies)) {
+            throw new \Exception('Account currency name not found');
+        }
+        return $this->accountCurrencies[$currencyName];
+    }
+
     public function removeAccount(string $currencyName): void
     {
         if (!array_key_exists($currencyName, $this->accountCurrencies)) {
@@ -74,9 +82,9 @@ class MultiCurrencyAccount
 
     public function getBalance(string $currencyName = null): float
     {
-        if (!$currencyName && array_key_exists($this->defaultCurrencyName, $this->accountCurrencies)) {
+        if (!$currencyName && $this->defaultCurrencyName && array_key_exists($this->defaultCurrencyName, $this->accountCurrencies)) {
             return $this->accountCurrencies[$this->defaultCurrencyName]->getBalance();
-        } elseif ($currencyName && array_key_exists($this->defaultCurrencyName, $this->accountCurrencies)) {
+        } elseif ($currencyName && array_key_exists($currencyName, $this->accountCurrencies)) {
             return $this->accountCurrencies[$currencyName]->getBalance();
         } else {
             throw new \Exception('Account currency name not found');
