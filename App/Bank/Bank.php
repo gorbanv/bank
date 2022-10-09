@@ -6,7 +6,7 @@ use App\Accounts\MultiCurrencyAccount;
 class Bank {
     private MultiCurrencyAccount $account;
 
-    public function createNewCurrencyAccount(): MultiCurrencyAccount{
+    public function createNewCurrencyAccount(): MultiCurrencyAccount {
         return $account = new MultiCurrencyAccount();
     }
 

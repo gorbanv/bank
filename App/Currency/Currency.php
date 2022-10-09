@@ -21,11 +21,12 @@ abstract class Currency
     public function getBalance(): float {
         return $this->amount;
     }
+
     public function setBalance(float $amount) {
         $this->amount = $amount;
     }
 
-    public function convertCurrency(Currency $currency): float{
+    public function convertCurrency(Currency $currency): float {
         $converter = new CurrencyConverter();
         $exchangeData = CurrencyData::getExchangeRate(static::CURRENCY_NAME);
         $converter->prepareConverter($currency::CURRENCY_NAME);
