@@ -15,6 +15,7 @@ $account->addCurrency('RUB');
 $account->addCurrency('EUR');
 $account->addCurrency('USD');
 $account->setDefaultCurrency('RUB');
+print_r($account->getSuppliedCurrency());
 $account->deposit(new RUB(1000));
 $account->deposit(new EUR(50));
 $account->deposit(new USD(50));
@@ -58,3 +59,7 @@ echo $account->getBalance() . PHP_EOL;
 
 echo "Step 10\n";
 $account->setDefaultCurrency('RUB');
+$account->removeAccount('EUR');
+$account->removeAccount('USD');
+print_r($account->getSuppliedCurrency());
+echo $account->getBalance() . PHP_EOL;
