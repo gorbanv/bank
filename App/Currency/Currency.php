@@ -14,8 +14,6 @@ abstract class Currency
             $this->amount = $amount;
         }
         else if ($amount instanceof Currency) {
-//            echo "\n" . $this->amount . "\n";
-//            echo "\n" . $this->convertCurrency($amount) . "\n";
             $this->amount += $this->convertCurrency($amount);
         }
     }
