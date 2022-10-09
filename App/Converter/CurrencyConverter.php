@@ -9,11 +9,16 @@ use App\Converter\Converters\UsdConverter;
 
 class CurrencyConverter
 {
-    public Converter $instance;
+    private Converter $instance;
 
     public function setConverter(Converter $converter): void
     {
         $this->instance = $converter;
+    }
+
+    public function getConverter(): Converter
+    {
+        return $this->instance;
     }
 
     public function prepareConverter(string $fromName): void
