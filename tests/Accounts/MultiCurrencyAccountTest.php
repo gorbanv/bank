@@ -8,6 +8,10 @@ use App\Currency\Currencies\{Rub, Eur, Usd};
 
 class MultiCurrencyAccountTest extends TestCase
 {
+    const CURRENCY_RUB = 'RUB';
+    const CURRENCY_EUR = 'EUR';
+    const CURRENCY_USD = 'USD';
+
     private MultiCurrencyAccount $account;
 
     protected function setUp(): void
@@ -17,40 +21,40 @@ class MultiCurrencyAccountTest extends TestCase
 
     public function testAddCurrency(): void
     {
-        $this->account->addCurrency("RUB");
+        $this->account->addCurrency(self::CURRENCY_RUB);
         $this->assertInstanceOf(
             Rub::class,
-            $this->account->getAccount("RUB"),
+            $this->account->getAccount(self::CURRENCY_RUB),
             "Account is not instance of Rub"
         );
-        $this->account->addCurrency("EUR");
+        $this->account->addCurrency(self::CURRENCY_EUR);
         $this->assertInstanceOf(
             Eur::class,
-            $this->account->getAccount("EUR"),
+            $this->account->getAccount(self::CURRENCY_EUR),
             "Account is not instance of Eur"
         );
-        $this->account->addCurrency("USD");
+        $this->account->addCurrency(self::CURRENCY_USD);
         $this->assertInstanceOf(
             Usd::class,
-            $this->account->getAccount("USD"),
+            $this->account->getAccount(self::CURRENCY_USD),
             "Account is not instance of Usd"
         );
     }
 
     public function testGetAccount(): void {
-        $this->account->addCurrency("RUB");
+        $this->account->addCurrency(self::CURRENCY_RUB);
         $this->assertInstanceOf(
             Rub::class,
-            $this->account->getAccount("RUB"),
+            $this->account->getAccount(self::CURRENCY_RUB),
             "Account is not instance of RUB"
         );
     }
 
     public function testRemoveAccount(): void {
         try {
-            $this->account->addCurrency("RUB");
-            $this->account->removeAccount("RUB");
-            $this->assertFalse($this->account->getAccount("RUB"), "Account is not removed");
+            $this->account->addCurrency(self::CURRENCY_RUB);
+            $this->account->removeAccount(self::CURRENCY_RUB);
+            $this->assertFalse($this->account->getAccount(self::CURRENCY_RUB), "Account is not removed");
         } catch (\Exception $e) {
             $this->assertEquals(
                 "Account currency name not found",
@@ -61,35 +65,35 @@ class MultiCurrencyAccountTest extends TestCase
     }
 
     public function testDeposit(): void {
-        $this->account->addCurrency("RUB");
+        $this->account->addCurrency(self::CURRENCY_RUB);
         $this->account->deposit(new Rub(1000));
-        $this->assertEquals(1000, $this->account->getBalance('RUB'));
+        $this->assertEquals(1000, $this->account->getBalance(self::CURRENCY_RUB));
     }
 
     public function testWithdraw(): void {
-        $this->account->addCurrency("RUB");
+        $this->account->addCurrency(self::CURRENCY_RUB);
         $this->account->deposit(new Rub(1000));
         $this->account->withdraw(new Rub(10));
-        $this->assertEquals(990, $this->account->getBalance('RUB'));
+        $this->assertEquals(990, $this->account->getBalance(self::CURRENCY_RUB));
     }
 
     public function testGetBalance(): void {
-        $this->account->addCurrency("RUB");
+        $this->account->addCurrency(self::CURRENCY_RUB);
         $this->account->deposit(new Rub(1000));
-        $this->assertEquals(1000, $this->account->getBalance('RUB'));
+        $this->assertEquals(1000, $this->account->getBalance(self::CURRENCY_RUB));
     }
 
     public function testGetSuppliedCurrency(): void {
         $currencies = ['RUB', 'EUR', 'USD'];
-        $this->account->addCurrency('RUB');
-        $this->account->addCurrency('EUR');
-        $this->account->addCurrency('USD');
+        $this->account->addCurrency(self::CURRENCY_RUB);
+        $this->account->addCurrency(self::CURRENCY_EUR);
+        $this->account->addCurrency(self::CURRENCY_USD);
         $this->assertEquals($currencies, $this->account->getSuppliedCurrency());
     }
 
     public function testSetDefaultCurrency(): void {
-        $this->account->addCurrency('RUB');
-        $this->account->setDefaultCurrency('RUB');
+        $this->account->addCurrency(self::CURRENCY_RUB);
+        $this->account->setDefaultCurrency(self::CURRENCY_RUB);
         $this->assertEquals("RUB", $this->account->getDefaultCurrency());
     }
 }
