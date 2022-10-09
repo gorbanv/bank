@@ -36,7 +36,7 @@ abstract class Currency
         $exchangeData = CurrencyData::getExchangeRate(static::CURRENCY_NAME);
         $converter->prepareConverter($currency::CURRENCY_NAME);
 
-        return $converter->instance->convert(
+        return $converter->getConverter()->convert(
             static::CURRENCY_NAME,
             $currency->getBalance(),
             $exchangeData[$currency::CURRENCY_NAME]
