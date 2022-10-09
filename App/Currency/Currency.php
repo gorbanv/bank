@@ -37,9 +37,6 @@ abstract class Currency
         );
     }
 
-    /* public static function createFromCurrency(Currency $currency) {
-    } */
-
     public static function setExchangeRate(String $exchangeCurrency, float $exchangeRate) {
         CurrencyData::setExchangeRate(static::CURRENCY_NAME, $exchangeCurrency, $exchangeRate);
     }

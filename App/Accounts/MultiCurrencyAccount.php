@@ -32,12 +32,6 @@ class MultiCurrencyAccount
             default:
                 throw new Exception('Currency type not found');
         }
-
-        /*if (isset($this->accountCurrencies[$currency::CURRENCY_NAME])) {
-            throw new Exception('Currency already added');
-        } else {
-            $this->accountCurrencies[$currency::CURRENCY_NAME] = $currency;
-        }*/
     }
 
     public function deposit(Currency $currency)
@@ -50,24 +44,6 @@ class MultiCurrencyAccount
             $this->accountCurrencies[$currency::CURRENCY_NAME]->getBalance()
             + $currency->getBalance()
         );
-
-        /*
-        switch($currency::CURRENCY_NAME) {
-            case self::CURRENCY_RUB:
-                $this->accountCurrencies[$currency::CURRENCY_NAME]->setBalance($currency->getBalance());
-            break;
-
-            case self::CURRENCY_EUR:
-                $this->accountCurrencies[$currency::CURRENCY_NAME]->setBalance($currency->getBalance());
-            break;
-
-            case self::CURRENCY_USD:
-                $this->accountCurrencies[$currency::CURRENCY_NAME]->setBalance($currency->getBalance());
-            break;
-
-            default:
-                throw new Exception('Currency account not found');
-        } */
     }
 
     public function withdraw(Currency $currency)

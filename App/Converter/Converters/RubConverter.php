@@ -6,7 +6,6 @@ use App\Currency\CurrencyData;
 
 class RubConverter implements Converter
 {
-
     public function convert(string $toCurrencyName, int $amount, $rate): float
     {
         switch ($toCurrencyName) {
