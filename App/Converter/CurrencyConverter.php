@@ -2,6 +2,7 @@
 namespace App\Converter;
 
 use App\Converter\Converter;
+use App\Converter\ConverterException;
 use App\Converter\Converters\RubConverter;
 use App\Converter\Converters\EurConverter;
 use App\Converter\Converters\UsdConverter;
@@ -28,7 +29,7 @@ class CurrencyConverter
                 $this->setConverter(new UsdConverter());
                 break;
             default:
-                throw new \Exception('Currency converter not found');
+                throw new ConverterException('Currency converter not found');
         }
     }
 }

@@ -3,6 +3,7 @@ namespace App\Converter\Converters;
 
 use App\Converter\Converter;
 use App\Currency\CurrencyData;
+use App\Converter\ConverterException;
 
 class EurConverter implements Converter
 {
@@ -15,7 +16,7 @@ class EurConverter implements Converter
                 return round($amount * $rate, 2);
                 break;
             default:
-                throw new \Exception('Currency for exchange not found');
+                throw new ConverterException('Currency for exchange not found');
         }
     }
 }
