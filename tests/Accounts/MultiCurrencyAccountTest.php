@@ -14,11 +14,17 @@ class MultiCurrencyAccountTest extends TestCase
 
     private MultiCurrencyAccount $account;
 
+    /**
+     * @covers \MultiCurrencyAccount
+     */
     protected function setUp(): void
     {
         $this->account = new MultiCurrencyAccount();
     }
 
+    /**
+     * @covers \MultiCurrencyAccount
+     */
     public function testAddCurrency(): void
     {
         $this->account->addCurrency(self::CURRENCY_RUB);
@@ -41,6 +47,9 @@ class MultiCurrencyAccountTest extends TestCase
         );
     }
 
+    /**
+     * @covers \MultiCurrencyAccount
+     */
     public function testGetAccount(): void {
         $this->account->addCurrency(self::CURRENCY_RUB);
         $this->assertInstanceOf(
@@ -50,6 +59,9 @@ class MultiCurrencyAccountTest extends TestCase
         );
     }
 
+    /**
+     * @covers \MultiCurrencyAccount
+     */
     public function testRemoveAccount(): void {
         try {
             $this->account->addCurrency(self::CURRENCY_RUB);
@@ -64,12 +76,18 @@ class MultiCurrencyAccountTest extends TestCase
         $this->fail( "No account expected") ;
     }
 
+    /**
+     * @covers \MultiCurrencyAccount
+     */
     public function testDeposit(): void {
         $this->account->addCurrency(self::CURRENCY_RUB);
         $this->account->deposit(new Rub(1000));
         $this->assertEquals(1000, $this->account->getBalance(self::CURRENCY_RUB));
     }
 
+    /**
+     * @covers \MultiCurrencyAccount
+     */
     public function testWithdraw(): void {
         $this->account->addCurrency(self::CURRENCY_RUB);
         $this->account->deposit(new Rub(1000));
@@ -77,12 +95,18 @@ class MultiCurrencyAccountTest extends TestCase
         $this->assertEquals(990, $this->account->getBalance(self::CURRENCY_RUB));
     }
 
+    /**
+     * @covers \MultiCurrencyAccount
+     */
     public function testGetBalance(): void {
         $this->account->addCurrency(self::CURRENCY_RUB);
         $this->account->deposit(new Rub(1000));
         $this->assertEquals(1000, $this->account->getBalance(self::CURRENCY_RUB));
     }
 
+    /**
+     * @covers \MultiCurrencyAccount
+     */
     public function testGetSuppliedCurrency(): void {
         $currencies = ['RUB', 'EUR', 'USD'];
         $this->account->addCurrency(self::CURRENCY_RUB);
@@ -91,6 +115,9 @@ class MultiCurrencyAccountTest extends TestCase
         $this->assertEquals($currencies, $this->account->getSuppliedCurrency());
     }
 
+    /**
+     * @covers \MultiCurrencyAccount
+     */
     public function testSetDefaultCurrency(): void {
         $this->account->addCurrency(self::CURRENCY_RUB);
         $this->account->setDefaultCurrency(self::CURRENCY_RUB);

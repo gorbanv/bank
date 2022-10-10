@@ -8,11 +8,17 @@ class BankTest extends TestCase
 {
     private Bank $bank;
 
+    /**
+     * @covers \Bank
+     */
     protected function setUp(): void
     {
         $this->bank = new Bank();
     }
 
+    /**
+     * @covers \Bank
+     */
     public function testCreateNewCurrencyAccount(): void {
         $account = $this->bank->createNewCurrencyAccount();
         $this->assertInstanceOf(MultiCurrencyAccount::class, $account, "Account is not instance of MultiCurrencyAccount");

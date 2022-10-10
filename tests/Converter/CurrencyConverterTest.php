@@ -13,6 +13,9 @@ class CurrencyConverterTest extends TestCase
     const CURRENCY_EUR = 'EUR';
     const CURRENCY_USD = 'USD';
 
+    /**
+     * @covers \CurrencyConverter
+     */
     public function testSetConverter() {
         $converter = new CurrencyConverter();
         $converter->prepareConverter(self::CURRENCY_RUB);
@@ -35,6 +38,9 @@ class CurrencyConverterTest extends TestCase
         );
     }
 
+    /**
+     * @covers \CurrencyConverter
+     */
     public function testGetConverter() {
         $converter = new CurrencyConverter();
         $converter->prepareConverter(self::CURRENCY_RUB);
@@ -45,6 +51,9 @@ class CurrencyConverterTest extends TestCase
         );
     }
 
+    /**
+     * @covers \CurrencyConverter
+     */
     public function testPrepareConverter() {
         $converter = new CurrencyConverter();
         $converter->prepareConverter(self::CURRENCY_RUB);

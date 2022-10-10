@@ -8,6 +8,9 @@ use App\Currency\Currencies\{Rub, Eur, Usd};
 class RubTest extends TestCase {
     private Rub $rub;
 
+    /**
+     * @covers \Rub
+     */
     protected function setUp(): void
     {
         $this->rub = new Rub(50);
@@ -15,15 +18,24 @@ class RubTest extends TestCase {
         $this->usd = new Usd(50);
     }
 
+    /**
+     * @covers \Rub
+     */
     public function testGetBalance() {
         $this->assertEquals(50, $this->rub->getBalance());
     }
 
+    /**
+     * @covers \Rub
+     */
     public function testSetBalance() {
         $this->rub->setBalance(100);
         $this->assertEquals(100, $this->rub->getBalance());
     }
 
+    /**
+     * @covers \Rub
+     */
     public function testConvertCurrency() {
         // Rub conversion
         $cash = $this->rub->convertCurrency(new Eur(120));
@@ -50,6 +62,9 @@ class RubTest extends TestCase {
         $this->assertEquals(1.71, $cash);
     }
 
+    /**
+     * @covers \Rub
+     */
     public function testSetExchangeRate() {
         $this->rub::setExchangeRate('EUR', 200);
         $rub = CurrencyData::getExchangeRate('RUB')['EUR'];
