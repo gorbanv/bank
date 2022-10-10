@@ -9,18 +9,34 @@ use App\Converter\Converters\UsdConverter;
 
 class CurrencyConverter
 {
+    // converter instance
     private Converter $instance;
 
+    /**
+     * Sets instance converter
+     * @param \App\Converter\Converter $converter - converter object
+     * @return void
+     */
     public function setConverter(Converter $converter): void
     {
         $this->instance = $converter;
     }
 
+    /**
+     * Returns instance of selected converter
+     * @return \App\Converter\Converter
+     */
     public function getConverter(): Converter
     {
         return $this->instance;
     }
 
+    /**
+     * Setup converter
+     * @param string $fromName - currency name e.g. 'RUB'
+     * @return void
+     * @throws \App\Converter\ConverterException
+     */
     public function prepareConverter(string $fromName): void
     {
         switch ($fromName) {

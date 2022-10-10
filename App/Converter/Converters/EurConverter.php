@@ -7,6 +7,14 @@ use App\Converter\ConverterException;
 
 class EurConverter implements Converter
 {
+    /**
+     * Convert currency to specify currency
+     * @param string $toCurrencyName - currency name for convert to
+     * @param int $amount - currency amount
+     * @param $rate - exchange rate
+     * @return float - converted amount
+     * @throws ConverterException
+     */
     public function convert(string $toCurrencyName, int $amount, $rate): float {
         switch ($toCurrencyName) {
             case CurrencyData::USD:
